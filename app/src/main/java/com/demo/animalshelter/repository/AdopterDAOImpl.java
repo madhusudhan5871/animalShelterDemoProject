@@ -8,6 +8,7 @@ import com.demo.animalshelter.dto.AdopterDTO;
 import com.demo.animalshelter.entity.Adopter;
 
 public class AdopterDAOImpl implements AdopterDAO{
+
 	private EntityManager em = Persistence.createEntityManagerFactory("animalShelter").createEntityManager();
 	
 	public void addAdopter(AdopterDTO adopterDTO) {
@@ -21,10 +22,26 @@ public class AdopterDAOImpl implements AdopterDAO{
 	}
 	
 	public void delete(String adopterEmail) {
-		em.getTransaction();
-		Adopter adopter = em.find(Adopter.class, adopterEmail);
-		if(adopter != null) em.remove(adopter);
-		else throw new PersistenceException("There is no adopter with email "+adopterEmail);
+		//Adopter adopter = em.find(Adopter.class, adopterEmail);
+		//if(adopter == null) throw new PersistenceException("There is no adopter with email "+adopterEmail);
+		Adopter adopter = find(adopterEmail);
+		em.getTransaction().begin();
+		em.remove(adopter);
 		em.getTransaction().commit();
+	}
+	
+	public Adopter find(String adopterEmail) {
+		Adopter adopter = em.find(Adopter.class, adopterEmail);
+		if(adopter == null) throw new PersistenceException("There is no adopter with email "+adopterEmail);
+		return adopter;
+	}
+	
+	public Adopter update(AdopterDTO adopterDTO) {
+		Adopter adopter = find(adopterDTO.getAdopterEmail());
+		em.getTransaction().begin();
+		adopter.setAdopterName(adopterDTO.getAdopterName());
+		adopter.setPhoneNumber(adopterDTO.getPhoneNumber());
+		em.getTransaction().commit();
+		return adopter;
 	}
 }

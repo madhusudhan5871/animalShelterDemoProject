@@ -26,11 +26,31 @@ public class AdopterServiceImpl implements AdopterService{
 	public void delete(String adopterEmail) {
 		try {
 			adopterDAO.delete(adopterEmail);
-			
+			System.out.println("Record deletion successful with email: "+ adopterEmail);
 		}catch(PersistenceException ex) {
 			System.out.println("Some database exception has occured: "+ ex.getMessage() + ex.getCause());
 		}catch(Exception ex) {
-			System.out.println("Some general exception has occured: "+ex.getCause());
+			System.out.println("Some general exception has occured: "+ ex.getMessage() + ex.getCause());
+		}
+	}
+	
+	public void find(String adopterEmail) {
+		try {
+			System.out.println("FOund record: "+adopterDAO.find(adopterEmail));
+		}catch(PersistenceException ex) {
+			System.out.println("Some database exception has occured: "+ ex.getMessage() + ex.getCause());
+		}catch(Exception ex) {
+			System.out.println("Some general exception has occured: "+ ex.getMessage() + ex.getCause());
+		}
+	}
+	
+	public void update (AdopterDTO adopterDTO) {
+		try {
+			System.out.println("Updated record successfully: " + adopterDAO.update(adopterDTO));
+		}catch(PersistenceException ex) {
+			System.out.println("Some database exception has occured: "+ ex.getMessage() + ex.getCause());
+		}catch(Exception ex) {
+			System.out.println("Some general exception has occured: "+ ex.getMessage() + ex.getCause());
 		}
 	}
 }

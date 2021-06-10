@@ -8,27 +8,75 @@ import com.demo.animalshelter.service.AdopterService;
 import com.demo.animalshelter.service.AdopterServiceImpl;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-    
-    //private AdopterService adopterService = new AdopterServiceImpl();
+	public String getGreeting() {
+		return "Hello World!";
+	}
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-        AdopterService adopterService = new AdopterServiceImpl();
-        
-        
-        System.out.println("Scenario 1: Insert a single record");
-        System.out.print("Trying to insert a record: ");
-        AdopterDTO adopterDTO = new AdopterDTO();
-        adopterDTO.setAdopterEmail("someemail");
-        adopterDTO.setAdopterName("someName");
-        adopterDTO.setPhoneNumber("1234512345");
-        System.out.println(adopterDTO);
-        adopterService.addAdopter(adopterDTO);
-        
-        System.out.println("Scenario 2: Delete a single record");
-        adopterService.delete("mad@gmail.com");
-    }
+	public static void main(String[] args) {
+		System.out.println(new App().getGreeting());
+		AdopterService adopterService = new AdopterServiceImpl();
+
+		System.out.println("Scenario 1: Insert a single record successfully");
+		AdopterDTO adopterDTO = new AdopterDTO();
+		adopterDTO.setAdopterEmail("someemail1");
+		adopterDTO.setAdopterName("someName");
+		adopterDTO.setPhoneNumber("1234512345");
+		adopterService.addAdopter(adopterDTO);
+
+		System.out.println("Scenario 2: Delete a single record (Email Not found scenario)");
+		adopterService.delete("mad@gmail.com");
+
+		System.out.println("Scenario 3: Delete a single record successfully ");
+		adopterService.delete("someemail1");
+
+		System.out.println(
+				"Scenario 4: Insert a single record but fails due to phone number validation (less than 10 digits)");
+		System.out.print("Trying to insert a record: ");
+		adopterDTO = new AdopterDTO();
+		adopterDTO.setAdopterEmail("someemail1");
+		adopterDTO.setAdopterName("someName");
+		adopterDTO.setPhoneNumber("123451234");
+		System.out.println(adopterDTO);
+		adopterService.addAdopter(adopterDTO);
+
+		System.out.println(
+				"Scenario 5: Insert a single record but fails due to phone number validation (letters inside phone)");
+		System.out.print("Trying to insert a record: ");
+		adopterDTO = new AdopterDTO();
+		adopterDTO.setAdopterEmail("someemail1");
+		adopterDTO.setAdopterName("someName");
+		adopterDTO.setPhoneNumber("1234512a34");
+		System.out.println(adopterDTO);
+		adopterService.addAdopter(adopterDTO);
+
+		System.out.println("Inserting 10 records for further operations");
+		for (int i = 0; i < 10; i++) {
+			adopterDTO = new AdopterDTO();
+			adopterDTO.setAdopterEmail("email" + i);
+			adopterDTO.setAdopterName("name" + i);
+			adopterDTO.setPhoneNumber("123451234" + i);
+			adopterService.addAdopter(adopterDTO);
+		}
+
+		System.out.println("Scenario 6: Fetch a single record");
+		adopterService.find("email1");
+
+		System.out.println("Scenario 7: Fetch a single record (but email not found)");
+		adopterService.find("email112");
+
+		System.out.println("Scenario 8: Update a record successfully");
+		adopterDTO = new AdopterDTO();
+		adopterDTO.setAdopterEmail("email1");
+		adopterDTO.setAdopterName("superAdopter");
+		adopterDTO.setPhoneNumber("9090808070");
+		adopterService.update(adopterDTO);
+
+		System.out.println("Scenario 9: Update a record (but cannot update because email not found)");
+		adopterDTO = new AdopterDTO();
+		adopterDTO.setAdopterEmail("email112");
+		adopterDTO.setAdopterName("superAdopter");
+		adopterDTO.setPhoneNumber("9090808070");
+		adopterService.update(adopterDTO);
+
+	}
 }
