@@ -4,8 +4,12 @@
 package com.demo.animalshelter;
 
 import com.demo.animalshelter.dto.AdopterDTO;
+import com.demo.animalshelter.dto.AnimalDTO;
+import com.demo.animalshelter.entity.AnimalType;
 import com.demo.animalshelter.service.AdopterService;
 import com.demo.animalshelter.service.AdopterServiceImpl;
+import com.demo.animalshelter.service.AnimalService;
+import com.demo.animalshelter.service.AnimalServiceImpl;
 
 public class App {
 	public String getGreeting() {
@@ -15,7 +19,8 @@ public class App {
 	public static void main(String[] args) {
 		System.out.println(new App().getGreeting());
 		AdopterService adopterService = new AdopterServiceImpl();
-
+		AnimalService animalService = new AnimalServiceImpl();
+		
 		System.out.println("Scenario 1: Insert a single record successfully");
 		AdopterDTO adopterDTO = new AdopterDTO();
 		adopterDTO.setAdopterEmail("someemail1");
@@ -83,5 +88,23 @@ public class App {
 		
 		System.out.println("Scenario 11: Finding a adopter record based on Phone number: (Making use of @NamedNativeQuery)");
 		adopterService.findByPhone("9090808070");
+		
+		System.out.println("Inserting 4 records of Animals for further operations");
+		for(int i=0;i<4;i++) {
+			AnimalDTO animalDTO = new AnimalDTO();
+			animalDTO.setaName("Scooby"+i);
+			animalDTO.setaType(AnimalType.DOG);
+			animalService.addAnimal(animalDTO);
+		}
+		
+		System.out.println("Scenario 12: Adding an adopter to an animal");
+		animalService.gotAdopted(1,"email5");
+		animalService.gotAdopted(2,"email5");
+		
+		System.out.println("Scenario 13: List all the animals adopted by a particular user");
+		adopterService.find("email5");
+		
+		System.out.println("Scenario 14: FInd the adopter of the animal ");
+		animalService.find(1);
 	}
 }

@@ -1,10 +1,20 @@
 package com.demo.animalshelter.dto;
 
+import java.util.List;
+
 public class AdopterDTO {
 	
 	private String adopterName;
 	private String adopterEmail;
 	private String phoneNumber;
+	private List<AnimalDTO> animal;
+	
+	public List<AnimalDTO> getAnimal() {
+		return animal;
+	}
+	public void setAnimal(List<AnimalDTO> animal) {
+		this.animal = animal;
+	}
 	public String getAdopterName() {
 		return adopterName;
 	}
@@ -26,7 +36,7 @@ public class AdopterDTO {
 	@Override
 	public String toString() {
 		return "AdopterDTO [adopterName=" + adopterName + ", adopterEmail=" + adopterEmail + ", phoneNumber="
-				+ phoneNumber + "]";
+				+ phoneNumber + ", animal=" + animal + "]";
 	}
 	
 }

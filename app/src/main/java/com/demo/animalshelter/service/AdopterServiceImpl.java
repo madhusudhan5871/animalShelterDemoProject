@@ -4,10 +4,10 @@ import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 
 import com.demo.animalshelter.dto.AdopterDTO;
+import com.demo.animalshelter.entity.Adopter;
 import com.demo.animalshelter.repository.AdopterDAO;
 import com.demo.animalshelter.repository.AdopterDAOImpl;
 
-@Transactional
 public class AdopterServiceImpl implements AdopterService{
 	private AdopterDAO adopterDAO = new AdopterDAOImpl();	
 	
@@ -36,7 +36,10 @@ public class AdopterServiceImpl implements AdopterService{
 	
 	public void find(String adopterEmail) {
 		try {
-			System.out.println("FOund record: "+adopterDAO.find(adopterEmail));
+			Adopter adopter = adopterDAO.find(adopterEmail);
+			System.out.println("FOund record: "+ adopter);
+			System.out.println("ANimals  "+adopter.getAnimal());
+		
 		}catch(PersistenceException ex) {
 			System.out.println("Some database exception has occured: "+ ex.getMessage() + ex.getCause());
 		}catch(Exception ex) {

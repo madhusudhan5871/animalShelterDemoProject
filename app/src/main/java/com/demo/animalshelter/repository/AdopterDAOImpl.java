@@ -7,6 +7,8 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import com.demo.animalshelter.dto.AdopterDTO;
 import com.demo.animalshelter.entity.Adopter;
 
@@ -34,7 +36,10 @@ public class AdopterDAOImpl implements AdopterDAO{
 	}
 	
 	public Adopter find(String adopterEmail) {
+		em.unwrap(Session.class).clear();;
+		em.getTransaction().begin();
 		Adopter adopter = em.find(Adopter.class, adopterEmail);
+		em.getTransaction().commit();
 		if(adopter == null) throw new PersistenceException("There is no adopter with email "+adopterEmail);
 		return adopter;
 	}
