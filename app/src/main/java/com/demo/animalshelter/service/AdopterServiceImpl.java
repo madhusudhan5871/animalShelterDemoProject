@@ -53,4 +53,24 @@ public class AdopterServiceImpl implements AdopterService{
 			System.out.println("Some general exception has occured: "+ ex.getMessage() + ex.getCause());
 		}
 	}
+	
+	public void findByName(String adopterName) {
+		try {
+			System.out.println(adopterDAO.findByName(adopterName));
+		}catch(PersistenceException ex) {
+			System.out.println("Some database exception has occured: "+ ex.getMessage() + ex.getCause());
+		}catch(Exception ex) {
+			System.out.println("Some general exception has occured: "+ ex.getMessage() + ex.getCause());
+		}
+	}
+	
+	public void findByPhone(String adopterPhone) {
+		try {
+			System.out.println(adopterDAO.findByPhone(adopterPhone));
+		}catch(PersistenceException ex) {
+			System.out.println("Some database exception has occured: "+ ex.getMessage() + ex.getCause());
+		}catch(Exception ex) {
+			System.out.println("Some general exception has occured: "+ ex.getMessage() + ex.getCause());
+		}
+	}
 }

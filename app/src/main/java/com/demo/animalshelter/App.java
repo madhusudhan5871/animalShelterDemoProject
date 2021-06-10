@@ -77,6 +77,11 @@ public class App {
 		adopterDTO.setAdopterName("superAdopter");
 		adopterDTO.setPhoneNumber("9090808070");
 		adopterService.update(adopterDTO);
-
+		
+		System.out.println("Scenario 10: Finding a adopter record based on Name: (Making use of @NamedQuery)");
+		adopterService.findByName("name2");  
+		
+		System.out.println("Scenario 11: Finding a adopter record based on Phone number: (Making use of @NamedNativeQuery)");
+		adopterService.findByPhone("9090808070");
 	}
 }

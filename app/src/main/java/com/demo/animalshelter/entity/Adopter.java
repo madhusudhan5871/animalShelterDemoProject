@@ -3,10 +3,14 @@ package com.demo.animalshelter.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQuery(name = "Adopter.findByName", query = "FROM Adopter where adopterName = ?1")
+@NamedNativeQuery(name="Adopter.findByPhone", query = "select * from adopter where phoneNumber = ?", resultClass = Adopter.class)
 public class Adopter {
 
 	@Id

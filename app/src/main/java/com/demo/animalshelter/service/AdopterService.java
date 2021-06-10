@@ -7,4 +7,6 @@ public interface AdopterService {
 	void delete(String adopterEmail);
 	void find(String adopterEmail);
 	void update(AdopterDTO adopterDTO);
+	void findByName(String name);
+	void findByPhone(String phoneNumber);
 }
