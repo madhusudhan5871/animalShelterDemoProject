@@ -1,0 +1,32 @@
+<web-app xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  
+    
+
+  <filter>
+    <filter-name>guiceFilter</filter-name>
+    <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>guiceFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+<welcome-file-list>
+<welcome-file>index.html</welcome-file>
+<welcome-file>index.htm</welcome-file>
+<welcome-file>index.jsp</welcome-file>
+<welcome-file>default.html</welcome-file>
+<welcome-file>default.htm</welcome-file>
+<welcome-file>default.jsp</welcome-file>
+</welcome-file-list>
+<servlet>
+<servlet-name>add</servlet-name>
+<servlet-class>com.demo.animalshelter.Servlet1</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>add</servlet-name>
+<url-pattern>/add</url-pattern>
+</servlet-mapping>
+</web-app>

@@ -10,6 +10,8 @@ import com.demo.animalshelter.service.AdopterService;
 import com.demo.animalshelter.service.AnimalService;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.persist.jpa.JpaPersistModule;
+import com.google.inject.servlet.ServletModule;
 
 public class App {
 	public String getGreeting() {
@@ -19,7 +21,7 @@ public class App {
 	public static void main(String[] args) {
 		System.out.println(new App().getGreeting());
 
-		Injector injector = Guice.createInjector(new AdopterModule());
+		Injector injector = Guice.createInjector(new AdopterModule(),new JpaPersistModule("animalShelter"));
 		AdopterService adopterService = injector.getInstance(AdopterService.class);
 
 		AnimalService animalService = injector.getInstance(AnimalService.class);

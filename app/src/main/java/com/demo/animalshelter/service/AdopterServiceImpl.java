@@ -1,5 +1,7 @@
 package com.demo.animalshelter.service;
 
+import java.util.List;
+
 import javax.persistence.PersistenceException;
 
 import com.demo.animalshelter.dto.AdopterDTO;
@@ -57,14 +59,17 @@ public class AdopterServiceImpl implements AdopterService {
 		}
 	}
 
-	public void findByName(String adopterName) {
-		try {
-			System.out.println(adopterDAO.findByName(adopterName));
-		} catch (PersistenceException ex) {
-			System.out.println("Some database exception has occured: " + ex.getMessage() + ex.getCause());
-		} catch (Exception ex) {
-			System.out.println("Some general exception has occured: " + ex.getMessage() + ex.getCause());
-		}
+	public List<Adopter> findByName(String adopterName) {
+		List<Adopter> adopterList = null;
+		//try {
+			adopterList = adopterDAO.findByName(adopterName);
+			System.out.println(adopterList);
+		//} catch (PersistenceException ex) {
+		//	System.out.println("Some database exception has occured: " + ex.getMessage() + ex.getCause());
+		//} catch (Exception ex) {
+		//	System.out.println("Some general exception has occured: " + ex.getMessage() + ex.getCause());
+		//}
+		return adopterList;
 	}
 
 	public void findByPhone(String adopterPhone) {

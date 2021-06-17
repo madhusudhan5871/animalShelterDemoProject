@@ -12,20 +12,22 @@ import org.hibernate.Session;
 import com.demo.animalshelter.dto.AdopterDTO;
 import com.demo.animalshelter.entity.Adopter;
 import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
 
 public class AdopterDAOImpl implements AdopterDAO {
 
 	@Inject
 	private EntityManager em;
-
+	
+	@Transactional
 	public void addAdopter(AdopterDTO adopterDTO) {
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		Adopter adopter = new Adopter();
 		adopter.setAdopterEmail(adopterDTO.getAdopterEmail());
 		adopter.setAdopterName(adopterDTO.getAdopterName());
 		adopter.setPhoneNumber(adopterDTO.getPhoneNumber());
 		em.persist(adopter);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	public void delete(String adopterEmail) {

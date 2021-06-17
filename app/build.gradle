@@ -5,10 +5,20 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/7.0.2/userguide/building_java_projects.html
  */
+buildscript {
+    repositories {
+        jcenter();
+    }
 
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
+    }
+}
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'com.bmuschko.tomcat' version "2.5"
+    id 'war'
 }
 
 repositories {
@@ -33,13 +43,30 @@ implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
 implementation group: 'javax.inject', name: 'javax.inject', version: '1'
     // https://mvnrepository.com/artifact/org.ow2.asm/asm
 implementation group: 'org.ow2.asm', name: 'asm', version: '9.1'
+
+// https://mvnrepository.com/artifact/com.google.inject.extensions/guice-servlet
+implementation group: 'com.google.inject.extensions', name: 'guice-servlet', version: '5.0.1'
+
     
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.10.Final'
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.13.Final'
     implementation group: 'org.glassfish', name: 'javax.el', version: '3.0.0'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
+	// https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+//    def tomcatVersion = '8.5.0'
+//    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+//          "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2",
+//           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
+
+
 }
+//tomcat {
+//   httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+//    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+//}
 
 application {
     // Define the main class for the application.
